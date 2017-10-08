@@ -8,7 +8,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.idaniu.maga.shopping.R;
 import com.idaniu.maga.shopping.fragment.Fragment1;
@@ -34,6 +36,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private LinearLayout ll3;
     private LinearLayout ll4;
     private LinearLayout ll5;
+
+    //标题栏中的图片和文字控件
+    private  ImageView iv1;
+    private  ImageView iv2;
+    private  ImageView iv3;
+    private  ImageView iv4;
+    private  ImageView iv5;
+    private TextView tv1;
+    private TextView tv2;
+    private TextView tv3;
+    private TextView tv4;
+    private TextView tv5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +88,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         fragmentList.add(fragment4);
         fragmentList.add(fragment5);
 
+        initTab();  //标题里的控件初始化
 
         //对Adapter进行设置
         mAdaper = new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -105,7 +120,26 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 resetTabView();	//先初始化
 
                 switch (position) {
-
+                    case 0:
+                        iv1.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_1_red));
+                        tv1.setTextColor(Color.RED);
+                        break;
+                    case 1:
+                        iv2.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_2_red));
+                        tv2.setTextColor(Color.RED);
+                        break;
+                    case 2:
+                        iv3.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_3_red));
+                        tv3.setTextColor(Color.RED);
+                        break;
+                    case 3:
+                        iv4.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_4_red));
+                        tv4.setTextColor(Color.RED);
+                        break;
+                    case 4:
+                        iv5.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_5_red));
+                        tv5.setTextColor(Color.RED);
+                        break;
                     default:
                         break;
                 }
@@ -114,11 +148,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
                 //arg0 为position页面码, float arg1为offset页面翻转完成百分比, int arg2为offsetPx页面翻转完成的像素值
+
+
+             /*
                 Log.d("tabline", arg0 + "," + arg1 + "," + arg2);
                 //设置tabline的左边距离
-            /*    LinearLayout.LayoutParams lllp = (android.widget.LinearLayout.LayoutParams) tabLine.getLayoutParams();
+                LinearLayout.LayoutParams lllp = (android.widget.LinearLayout.LayoutParams) tabLine.getLayoutParams();
                 lllp.leftMargin = (int) (arg0*screen1_3 + arg1*screen1_3);
-                tabLine.setLayoutParams(lllp);*/
+                tabLine.setLayoutParams(lllp);
+             */
             }
 
             @Override
@@ -128,7 +166,39 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         });
     }
 
+    //标题栏里的控件引用初始化
+    private void initTab() {
+        iv1 = (ImageView)findViewById(R.id.iv_1);
+        iv2 = (ImageView)findViewById(R.id.iv_2);
+        iv3 = (ImageView)findViewById(R.id.iv_3);
+        iv4 = (ImageView)findViewById(R.id.iv_4);
+        iv5 = (ImageView)findViewById(R.id.iv_5);
+
+        tv1 = (TextView)findViewById(R.id.tv_1);
+        tv2 = (TextView)findViewById(R.id.tv_2);
+        tv3 = (TextView)findViewById(R.id.tv_3);
+        tv4 = (TextView)findViewById(R.id.tv_4);
+        tv5 = (TextView)findViewById(R.id.tv_5);
+
+        //默认状态。第一个页面
+        resetTabView();
+        iv1.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_1_red));
+        tv1.setTextColor(Color.RED);
+    }
+
+    //标题栏显示初始状态：图片、文字。每次切换时首先恢复初始状态
     private void resetTabView() {
+        iv1.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_1_gray));
+        iv2.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_2_gray));
+        iv3.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_3_gray));
+        iv4.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_4_gray));
+        iv5.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_5_gray));
+
+        tv1.setTextColor(Color.GRAY);
+        tv2.setTextColor(Color.GRAY);
+        tv3.setTextColor(Color.GRAY);
+        tv4.setTextColor(Color.GRAY);
+        tv5.setTextColor(Color.GRAY);
 
     }
 
