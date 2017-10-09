@@ -4,6 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--图片轮播展示-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager_hotnews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background_material_light" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="#99000000"
+            android:layout_gravity="bottom">
+            <!--小圆点指示区域-->
+            <LinearLayout
+                android:id="@+id/ll_hotnews_indicator"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|right"
+                android:gravity="center"
+                android:orientation="horizontal" />
+            <!--图片标题的文字区域-->
+            <TextView
+                android:id="@+id/tv_title_hotnews"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|left"
+                android:gravity="left"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:singleLine="true"
+                android:orientation="horizontal" />
+        </FrameLayout>
+
+    </FrameLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

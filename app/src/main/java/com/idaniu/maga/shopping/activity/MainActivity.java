@@ -1,12 +1,11 @@
 package com.idaniu.maga.shopping.activity;
 
 import android.graphics.Color;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,7 +26,7 @@ import java.util.List;
  */
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
 
-    private ViewPager mViewPager;
+    private ViewPager mViewPager;       //用来展示五个fragment的ViewPager
     private FragmentPagerAdapter mAdaper;   //FragmentPager的适配器
     private List<Fragment> fragmentList;	//用来存放几个Fragment
 
@@ -56,9 +55,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         initView();
 
-
     }
 
+    //布局初始化
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentList = new ArrayList<Fragment>();
