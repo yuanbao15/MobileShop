@@ -5,7 +5,9 @@ import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +22,9 @@ import com.google.gson.reflect.TypeToken;
 import com.idaniu.maga.shopping.Constant;
 import com.idaniu.maga.shopping.R;
 import com.idaniu.maga.shopping.ShoppingApplication;
+import com.idaniu.maga.shopping.adapter.HomeRecyclerAdapter;
 import com.idaniu.maga.shopping.bean.BannerBean;
+import com.idaniu.maga.shopping.bean.HomeBean;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -45,34 +49,30 @@ public class Fragment1 extends Fragment{
     private BannerPagerAdapter mBannerPagerAdapter;
     private LinearLayout mIndicateLinearLayout;     //圆点指示器
     private TextView mBannerTitleTextView;      //图片轮播中每张图片的标题
-//    private RecyclerView mRecyclerView;
+
     private List<BannerBean> mBannerList;
     private List<ImageView> mIndicateList = new ArrayList<>();   //圆点集合
     private List<ImageView> mBannerViewsList = new ArrayList<>();   //图片展示的集合
 
-//    private List<HomeBean> mData = new ArrayList<>();
-//    private HomeAdapter mHomeAdapter;
+    private List<HomeBean> homeBeanList = new ArrayList<>();    //主页瀑布流的部分
+    private HomeRecyclerAdapter mHomeRecyclerAdapter;
+    private RecyclerView recyclerView;
 
-    public static Fragment1 newInstance(String tabName){
+/*    public static Fragment1 newInstance(String tabName){
         Fragment1 fragment = new Fragment1();
 //        fragment.mTabName = tabName;
         return fragment;
-    }
+    }*/
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-/*        //报NetworkOnMainThreadException异常后在网上找的这一段
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .detectDiskReads().detectDiskWrites().detectNetwork()
-                .penaltyLog().build());
-        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
-                .penaltyLog().penaltyDeath().build());*/
 
         View v = inflater.inflate(R.layout.frag1, container, false);
         initView(v);
+//        getLayoutInflater(savedInstanceState).inflate(R.layout.home_item,container);
+// 没有这句报错，因为否则就不知道把哪一个布局放到瀑布流中。也不对，viewHolder里有对R.layout.home_item的引用
         return v;
     }
 
@@ -80,6 +80,7 @@ public class Fragment1 extends Fragment{
         mViewPager = (ViewPager) v.findViewById(R.id.viewpager_hotnews);
         mBannerTitleTextView =(TextView) v.findViewById(R.id.tv_title_hotnews);
         mIndicateLinearLayout =(LinearLayout) v.findViewById(R.id.ll_hotnews_indicator);
+
 
         mBannerPagerAdapter = new BannerPagerAdapter();
         mViewPager.setAdapter(mBannerPagerAdapter);     //给mViewPager绑定这个适配器
@@ -113,16 +114,28 @@ public class Fragment1 extends Fragment{
             }
         });
 
-        loadHeaderData();       //将图片轮播的图片资源下载到位
+        loadBannerData();       //下载 图片轮播的图片资源
+
+
+        //主页瀑布流部分初始化
+        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_home);
+        //瀑布流效果
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
+//        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mHomeRecyclerAdapter = new HomeRecyclerAdapter(getActivity(),homeBeanList);
+        recyclerView.setAdapter(mHomeRecyclerAdapter);
+
+        loadHomeData();     //下载 主页瀑布流的数据
 
     }
 
-    //下载图片资源，使用okhttp方式。
-    private void loadHeaderData() {
+    //下载主页homebean数据，使用okhttp方式。
+    private void loadHomeData() {
         OkHttpClient client = new OkHttpClient();       //创建网络实例
         //创建请求
         Request request = new Request.Builder()
-                .url(Constant.HEAD_URL + "?type=1")
+                .url(Constant.HOME_URL + "?type=1")
                 .build();
         //返回数据
         client.newCall(request).enqueue(new Callback() {     //书上使用的execute()方法，同步方式。老师的是enqueue(new Callback())这个是没有返回值的，异步方式。
@@ -140,9 +153,49 @@ public class Fragment1 extends Fragment{
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
+//                System.out.println(responseData);
                 Gson gson = new Gson();     //用Gson解析Json数据
                 Type type = new TypeToken<List<BannerBean>>(){}.getType();  //这句不知道是干嘛，获取类型？
-                mBannerList = gson.fromJson(responseData, type);
+//                homeBeanList.clear();
+                homeBeanList = gson.fromJson(responseData, type);        //gson获取到的数据成为一个个bannerbean对象然后添加到mbannerlist列表中
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mHomeRecyclerAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+    }
+
+    //下载图片资源，使用okhttp方式。
+    private void loadBannerData() {
+        OkHttpClient client = new OkHttpClient();       //创建网络实例
+        //创建请求
+        Request request = new Request.Builder()
+                .url(Constant.HEAD_URL + "?type=1")         //接口文档中type为1的数据（广告图片）
+                .build();
+        //返回数据
+        client.newCall(request).enqueue(new Callback() {     //书上使用的execute()方法，同步方式。老师的是enqueue(new Callback())这个是没有返回值的，异步方式。
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if(getActivity() == null) return;
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ShoppingApplication.getInstance(), "load data failed!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseData = response.body().string();
+//                System.out.println(responseData);
+                Gson gson = new Gson();     //用Gson解析Json数据
+                Type type = new TypeToken<List<BannerBean>>(){}.getType();  //这句不知道是干嘛，获取类型？
+                mBannerList = gson.fromJson(responseData, type);        //gson获取到的数据成为一个个bannerbean对象然后添加到mbannerlist列表中
 
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
@@ -172,7 +225,7 @@ public class Fragment1 extends Fragment{
 
                             }
                             mBannerPagerAdapter.notifyDataSetChanged();
-                            mIndicateLinearLayout.postDelayed(bannerRunnable, 1000);  //
+                            mIndicateLinearLayout.postDelayed(bannerRunnable, 1000);
 
                         }
                     }
@@ -183,20 +236,20 @@ public class Fragment1 extends Fragment{
 
     }
 
-    //图片自动轮播。但圆点怎么更换图片呢
+    //图片自动轮播。但圆点怎么更换图片呢？不在这儿，在那个onchangelistener()监听方法里
     private Runnable bannerRunnable = new Runnable() {
         @Override
         public void run() {
             //圆点指示器随着图片变化而变化
             int index = mViewPager.getCurrentItem();
             if(index == mBannerList.size()-1){  //循环重复
-                index = 0;
+                index = -1;
             }else{
                 index = index+1;
             }
 
             mViewPager.setCurrentItem(index,true);
-            mIndicateLinearLayout.postDelayed(bannerRunnable,3000);
+            mIndicateLinearLayout.postDelayed(bannerRunnable,3000);     //每过3秒进行切换图片
         }
     };
 

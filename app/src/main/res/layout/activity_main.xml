@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.idaniu.maga.shopping.activity.MainActivity">
 
+    <!--底部菜单栏的布局-->
     <LinearLayout
         android:id="@+id/tabBar"
         android:layout_alignParentBottom="true"

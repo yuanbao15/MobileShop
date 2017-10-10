@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--    <RecyclerView
+        android:layout_width=""
+        android:layout_height="match_parent"></RecyclerView>-->
+
+
     <!--图片轮播展示-->
     <FrameLayout
         android:layout_width="match_parent"
@@ -43,13 +48,19 @@
 
     </FrameLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="主页"
-        android:textSize="60sp"
-        android:background="#bd9"
-        android:gravity="center"/>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <!--<TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="主页"
+                android:textSize="60sp"
+                android:background="#bd9"
+                android:gravity="center"/>-->
 
 </LinearLayout>
