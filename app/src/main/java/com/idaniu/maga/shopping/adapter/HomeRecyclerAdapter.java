@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.idaniu.maga.shopping.R;
 import com.idaniu.maga.shopping.bean.HomeBean;
@@ -32,8 +33,11 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         ImageView imageView3;
         TextView textView;
 
+        View homeBeanView;  //定义这个视图用于处理recyclerView里的的点击事件
+
         public ViewHolder(View view) {
             super(view);
+            homeBeanView = view;
             textView = (TextView) view.findViewById(R.id.item_title);
             imageView1 = (ImageView) view.findViewById(R.id.item_image1);
             imageView2 = (ImageView) view.findViewById(R.id.item_image2);
@@ -57,7 +61,44 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.home_item, viewGroup, false);
-        ViewHolder holder = new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+
+        //设置点击事件监听处理：这里是整个视图的。不设置子项或者点击的不是子项的部分，就会执行整个视图的点击响应
+        holder.homeBeanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i = holder.getAdapterPosition();
+                HomeBean homeBean = homeBeanList.get(i);
+                Toast.makeText(v.getContext(),"yb点击了View"+homeBean.getTitle(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //这里是每个子项的
+        holder.imageView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i = holder.getAdapterPosition();
+                HomeBean homeBean = homeBeanList.get(i);
+                Toast.makeText(v.getContext(),"yb点击了Image"+homeBean.getCpOne().getTitle(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i = holder.getAdapterPosition();
+                HomeBean homeBean = homeBeanList.get(i);
+                Toast.makeText(v.getContext(),"yb点击了Image"+homeBean.getCpTwo().getTitle(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i = holder.getAdapterPosition();
+                HomeBean homeBean = homeBeanList.get(i);
+                Toast.makeText(v.getContext(),"yb点击了Image"+homeBean.getCpThree().getTitle(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return holder;
     }
 

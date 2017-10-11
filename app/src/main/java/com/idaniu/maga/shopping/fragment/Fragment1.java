@@ -1,15 +1,13 @@
 package com.idaniu.maga.shopping.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.idaniu.maga.shopping.Constant;
 import com.idaniu.maga.shopping.R;
 import com.idaniu.maga.shopping.ShoppingApplication;
+import com.idaniu.maga.shopping.activity.BannerActivity;
 import com.idaniu.maga.shopping.adapter.HomeRecyclerAdapter;
 import com.idaniu.maga.shopping.bean.BannerBean;
 import com.idaniu.maga.shopping.bean.HomeBean;
@@ -118,8 +117,6 @@ public class Fragment1 extends Fragment{
         loadBannerData();       //下载 图片轮播的图片资源
 
 
-        Log.d(TAG, "frag1执行到这1");
-
         loadHomeData();     //下载 主页瀑布流的数据
 
         //主页瀑布流部分初始化
@@ -131,7 +128,7 @@ public class Fragment1 extends Fragment{
         mHomeRecyclerAdapter = new HomeRecyclerAdapter(getActivity(),homeBeanList);
 
         recyclerView.setAdapter(mHomeRecyclerAdapter);
-        Log.d(TAG, "frag1执行到这2");
+//        Log.d(TAG, "frag1执行到这2");
 
     }
 
@@ -296,6 +293,27 @@ public class Fragment1 extends Fragment{
             view.setImageResource(R.mipmap.ic_launcher);
             Picasso.with(getActivity()).load(mBannerList.get(position).getImgUrl()).into(view);
             container.addView(view);
+
+            //yb为bannerView设置点击监听响应。是在这而不是在mViewPager
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(),"yb点击了首页"+mViewPager.getCurrentItem(),Toast.LENGTH_SHORT).show();
+                    if(mViewPager.getCurrentItem() == 0){
+                        Intent intent = new Intent();
+                        intent.setClass(getContext(), BannerActivity.class);
+                        startActivity(intent);
+                        /*
+                        //打开手机手机浏览器访问一个网址
+                        Intent intent = new Intent();
+                        intent.setAction("android.intent.action.VIEW");
+                        Uri data = Uri.parse("https://yuanbao15.github.io");
+                        intent.setData(data);
+                        startActivity(intent);*/
+                    }
+                }
+            });
+
             return view;
         }
     }
