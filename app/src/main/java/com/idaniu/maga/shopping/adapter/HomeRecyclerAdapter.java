@@ -3,6 +3,7 @@ package com.idaniu.maga.shopping.adapter;
 import android.content.Context;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import java.util.List;
 
 /**
  *
- * Ó¦ÓÃPicasso£¬AndroidÍ¼Æ¬ÏÂÔØ»º´æ¿â
+ * åº”ç”¨Picassoï¼ŒAndroidå›¾ç‰‡ä¸‹è½½ç¼“å­˜åº“
  * Created by yuanbao15 on 2017/10/10.
  */
 public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder>{
@@ -26,24 +27,35 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     private List<HomeBean> homeBeanList;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView imageView;
+        ImageView imageView1;
+        ImageView imageView2;
+        ImageView imageView3;
         TextView textView;
 
         public ViewHolder(View view) {
             super(view);
-            imageView = (ImageView) view.findViewById(R.id.item_image);
             textView = (TextView) view.findViewById(R.id.item_title);
+            imageView1 = (ImageView) view.findViewById(R.id.item_image1);
+            imageView2 = (ImageView) view.findViewById(R.id.item_image2);
+            imageView3 = (ImageView) view.findViewById(R.id.item_image3);
+
         }
     }
 
-    //¹¹Ôìº¯Êı
+    //æ„é€ å‡½æ•°
     public HomeRecyclerAdapter(Context context, List<HomeBean> homeBeanList) {
         this.context = context;
         this.homeBeanList = homeBeanList;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public int getItemViewType(int position) {
+//        return super.getItemViewType(position);
+        return position%2;  //æŒ‰ç…§è€å¸ˆçš„æ”¹çš„
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.home_item, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -52,16 +64,19 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int i) {
         HomeBean homeBean = homeBeanList.get(i);
+        Log.d("RecyclerViewAdapter", "æ˜¾ç¤ºå›¾ç‰‡" + i);
         holder.textView.setText(homeBean.getTitle());
-//        holder.imageView.setImageResource(homeBean.getId());  //±¾µØÍ¼Æ¬¾ÍÓÃÕâÖÖ·½Ê½£¬ÍøÂçµÄ»°ÓÃPicasso»º´æ¿â
-        Picasso.with(context).load(homeBean.getCpOne().getImgUrl()).into(holder.imageView);    //ÕâÀïĞèÒªÉÏÏÂÎÄ
+//        holder.imageView1.setImageResource(R.drawable.icon_wechat_72);    //æœ¬åœ°å›¾ç‰‡å°±ç”¨è¿™ç§æ–¹å¼ï¼Œç½‘ç»œçš„è¯ç”¨Picassoç¼“å­˜åº“
+        Picasso.with(context).load(homeBean.getCpOne().getImgUrl()).into(holder.imageView1);    //è¿™é‡Œéœ€è¦ä¸Šä¸‹æ–‡
+        Picasso.with(context).load(homeBean.getCpTwo().getImgUrl()).into(holder.imageView2);    //è¿™é‡Œéœ€è¦ä¸Šä¸‹æ–‡
+        Picasso.with(context).load(homeBean.getCpThree().getImgUrl()).into(holder.imageView3);    //è¿™é‡Œéœ€è¦ä¸Šä¸‹æ–‡
 
 
     }
 
     @Override
     public int getItemCount() {
-        if (homeBeanList == null) return 0;
+//        if (homeBeanList == null) return 0;
         return homeBeanList.size();
     }
 }

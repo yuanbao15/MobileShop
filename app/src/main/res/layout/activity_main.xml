@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.idaniu.maga.shopping.activity.MainActivity">
 
+
     <!--底部菜单栏的布局-->
     <LinearLayout
         android:id="@+id/tabBar"
@@ -114,8 +115,11 @@
                 android:textSize="12sp"/>
         </LinearLayout>
 
-
     </LinearLayout>
+
+
+
+
 
     <!--这一段之前放在上面就报错了，因为要先有id后才能引用-->
     <LinearLayout

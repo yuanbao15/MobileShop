@@ -4,13 +4,13 @@ package com.idaniu.maga.shopping;
  * Created by yuanbao15 on 2017/10/9.
  */
 public class Constant {
-    //Ê×Ò³Í¼Æ¬ÂÖ²¥µÄÍ¼Æ¬×ÊÔ´µØÖ·
+    //é¦–é¡µå›¾ç‰‡è½®æ’­çš„å›¾ç‰‡èµ„æºåœ°å€
 //    public static final String HEAD_URL = "http://112.124.22.238:8081/course_api/banner/query";
-    public static final String HEAD_URL = "http://www.yuanbao15.club/ybfile/yb.json";     //yb×Ô¼ºµÄ....³É¹¦ÁË¡£×¢ÒâjsonÊı¾İ¸ñÊ½
+    public static final String HEAD_URL = "http://www.yuanbao15.club/ybfile/yb.json";     //ybè‡ªå·±çš„....æˆåŠŸäº†ã€‚æ³¨æ„jsonæ•°æ®æ ¼å¼
 
 
-//    Ö÷Ò³ÆÙ²¼Á÷µÄÍøÂç×ÊÔ´µØÖ·
-    public static final String HOME_URL = "url£ºhttp://112.124.22.238:8081/course_api/campaign/recommend";
+    //    ä¸»é¡µç€‘å¸ƒæµçš„ç½‘ç»œèµ„æºåœ°å€
+    public static final String HOME_URL = "http://112.124.22.238:8081/course_api/campaign/recommend";
 
 
 

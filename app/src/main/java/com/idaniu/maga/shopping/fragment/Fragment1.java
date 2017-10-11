@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,22 +40,22 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * µÚÒ»¸öfragment£¬Õ¹Ê¾Ö÷Ò³
+ * ç¬¬ä¸€ä¸ªfragmentï¼Œå±•ç¤ºä¸»é¡µ
  * Created by yuanbao15 on 2017/10/8.
  */
 public class Fragment1 extends Fragment{
     private static final String TAG = "HomeFragment";
 
-    private ViewPager mViewPager;       //Í¼Æ¬ÂÖ²¥ÀïµÄViewPager
+    private ViewPager mViewPager;       //å›¾ç‰‡è½®æ’­é‡Œçš„ViewPager
     private BannerPagerAdapter mBannerPagerAdapter;
-    private LinearLayout mIndicateLinearLayout;     //Ô²µãÖ¸Ê¾Æ÷
-    private TextView mBannerTitleTextView;      //Í¼Æ¬ÂÖ²¥ÖĞÃ¿ÕÅÍ¼Æ¬µÄ±êÌâ
+    private LinearLayout mIndicateLinearLayout;     //åœ†ç‚¹æŒ‡ç¤ºå™¨
+    private TextView mBannerTitleTextView;      //å›¾ç‰‡è½®æ’­ä¸­æ¯å¼ å›¾ç‰‡çš„æ ‡é¢˜
 
     private List<BannerBean> mBannerList;
-    private List<ImageView> mIndicateList = new ArrayList<>();   //Ô²µã¼¯ºÏ
-    private List<ImageView> mBannerViewsList = new ArrayList<>();   //Í¼Æ¬Õ¹Ê¾µÄ¼¯ºÏ
+    private List<ImageView> mIndicateList = new ArrayList<>();   //åœ†ç‚¹é›†åˆ
+    private List<ImageView> mBannerViewsList = new ArrayList<>();   //å›¾ç‰‡å±•ç¤ºçš„é›†åˆ
 
-    private List<HomeBean> homeBeanList = new ArrayList<>();    //Ö÷Ò³ÆÙ²¼Á÷µÄ²¿·Ö
+    private List<HomeBean> homeBeanList = new ArrayList<>();    //ä¸»é¡µç€‘å¸ƒæµçš„éƒ¨åˆ†
     private HomeRecyclerAdapter mHomeRecyclerAdapter;
     private RecyclerView recyclerView;
 
@@ -72,7 +73,7 @@ public class Fragment1 extends Fragment{
         View v = inflater.inflate(R.layout.frag1, container, false);
         initView(v);
 //        getLayoutInflater(savedInstanceState).inflate(R.layout.home_item,container);
-// Ã»ÓĞÕâ¾ä±¨´í£¬ÒòÎª·ñÔò¾Í²»ÖªµÀ°ÑÄÄÒ»¸ö²¼¾Ö·Åµ½ÆÙ²¼Á÷ÖĞ¡£Ò²²»¶Ô£¬viewHolderÀïÓĞ¶ÔR.layout.home_itemµÄÒıÓÃ
+// æ²¡æœ‰è¿™å¥æŠ¥é”™ï¼Œå› ä¸ºå¦åˆ™å°±ä¸çŸ¥é“æŠŠå“ªä¸€ä¸ªå¸ƒå±€æ”¾åˆ°ç€‘å¸ƒæµä¸­ã€‚ä¹Ÿä¸å¯¹ï¼ŒviewHolderé‡Œæœ‰å¯¹R.layout.home_itemçš„å¼•ç”¨
         return v;
     }
 
@@ -83,9 +84,9 @@ public class Fragment1 extends Fragment{
 
 
         mBannerPagerAdapter = new BannerPagerAdapter();
-        mViewPager.setAdapter(mBannerPagerAdapter);     //¸ømViewPager°ó¶¨Õâ¸öÊÊÅäÆ÷
+        mViewPager.setAdapter(mBannerPagerAdapter);     //ç»™mViewPagerç»‘å®šè¿™ä¸ªé€‚é…å™¨
 
-        //Í¼Æ¬ÂÖ²¥µÄviewpagerÔÚÒ³Ãæ¸Ä±äÊ±ºò
+        //å›¾ç‰‡è½®æ’­çš„viewpageråœ¨é¡µé¢æ”¹å˜æ—¶å€™
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -94,17 +95,17 @@ public class Fragment1 extends Fragment{
 
             @Override
             public void onPageSelected(int i) {
-                for(int j=0; j<mIndicateLinearLayout.getChildCount(); j++){ //Ñ¡µ½ÄÄÒ³¾ÍÌø×ªµ½ÄÄÒ»Ò³
+                for (int j = 0; j < mIndicateLinearLayout.getChildCount(); j++) { //é€‰åˆ°å“ªé¡µå°±è·³è½¬åˆ°å“ªä¸€é¡µ
                     View view = mIndicateLinearLayout.getChildAt(j);
-                    if(j == i){
+                    if (j == i) {
                         view.setSelected(true);
-                        mIndicateList.get(j).setBackgroundResource(R.drawable.indicate_circle_red); //ÊµÏÖÔ²µãµÄ×´Ì¬±ä»¯
-                    }else{
+                        mIndicateList.get(j).setBackgroundResource(R.drawable.indicate_circle_red); //å®ç°åœ†ç‚¹çš„çŠ¶æ€å˜åŒ–
+                    } else {
                         view.setSelected(false);
                         mIndicateList.get(j).setBackgroundResource(R.drawable.indicate_circle_gray);
                     }
                 }
-                //±êÌâÄÚÈİÒ²ÒªËæÖ®ÏàÓ¦µÄ¸ü¸Ä
+                //æ ‡é¢˜å†…å®¹ä¹Ÿè¦éšä¹‹ç›¸åº”çš„æ›´æ”¹
                 mBannerTitleTextView.setText(mBannerList.get(i).getName());
             }
 
@@ -114,31 +115,35 @@ public class Fragment1 extends Fragment{
             }
         });
 
-        loadBannerData();       //ÏÂÔØ Í¼Æ¬ÂÖ²¥µÄÍ¼Æ¬×ÊÔ´
+        loadBannerData();       //ä¸‹è½½ å›¾ç‰‡è½®æ’­çš„å›¾ç‰‡èµ„æº
 
 
-        //Ö÷Ò³ÆÙ²¼Á÷²¿·Ö³õÊ¼»¯
+        Log.d(TAG, "frag1æ‰§è¡Œåˆ°è¿™1");
+
+        loadHomeData();     //ä¸‹è½½ ä¸»é¡µç€‘å¸ƒæµçš„æ•°æ®
+
+        //ä¸»é¡µç€‘å¸ƒæµéƒ¨åˆ†åˆå§‹åŒ–
         recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_home);
-        //ÆÙ²¼Á÷Ğ§¹û
-//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        //ç€‘å¸ƒæµæ•ˆæœ
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);   //åˆ†æˆå‡ åˆ—
+        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));      //æ™®é€šçº¿æ€§å±•ç¤º
         mHomeRecyclerAdapter = new HomeRecyclerAdapter(getActivity(),homeBeanList);
-        recyclerView.setAdapter(mHomeRecyclerAdapter);
 
-        loadHomeData();     //ÏÂÔØ Ö÷Ò³ÆÙ²¼Á÷µÄÊı¾İ
+        recyclerView.setAdapter(mHomeRecyclerAdapter);
+        Log.d(TAG, "frag1æ‰§è¡Œåˆ°è¿™2");
 
     }
 
-    //ÏÂÔØÖ÷Ò³homebeanÊı¾İ£¬Ê¹ÓÃokhttp·½Ê½¡£
+    //ä¸‹è½½ä¸»é¡µhomebeanæ•°æ®ï¼Œä½¿ç”¨okhttpæ–¹å¼ã€‚
     private void loadHomeData() {
-        OkHttpClient client = new OkHttpClient();       //´´½¨ÍøÂçÊµÀı
-        //´´½¨ÇëÇó
+        OkHttpClient client = new OkHttpClient();       //åˆ›å»ºç½‘ç»œå®ä¾‹
+        //åˆ›å»ºè¯·æ±‚
         Request request = new Request.Builder()
                 .url(Constant.HOME_URL + "?type=1")
                 .build();
-        //·µ»ØÊı¾İ
-        client.newCall(request).enqueue(new Callback() {     //ÊéÉÏÊ¹ÓÃµÄexecute()·½·¨£¬Í¬²½·½Ê½¡£ÀÏÊ¦µÄÊÇenqueue(new Callback())Õâ¸öÊÇÃ»ÓĞ·µ»ØÖµµÄ£¬Òì²½·½Ê½¡£
+        //è¿”å›æ•°æ®
+        client.newCall(request).enqueue(new Callback() {     //ä¹¦ä¸Šä½¿ç”¨çš„execute()æ–¹æ³•ï¼ŒåŒæ­¥æ–¹å¼ã€‚è€å¸ˆçš„æ˜¯enqueue(new Callback())è¿™ä¸ªæ˜¯æ²¡æœ‰è¿”å›å€¼çš„ï¼Œå¼‚æ­¥æ–¹å¼ã€‚
             @Override
             public void onFailure(Call call, IOException e) {
                 if(getActivity() == null) return;
@@ -153,12 +158,18 @@ public class Fragment1 extends Fragment{
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
-//                System.out.println(responseData);
-                Gson gson = new Gson();     //ÓÃGson½âÎöJsonÊı¾İ
-                Type type = new TypeToken<List<BannerBean>>(){}.getType();  //Õâ¾ä²»ÖªµÀÊÇ¸ÉÂï£¬»ñÈ¡ÀàĞÍ£¿
-//                homeBeanList.clear();
-                homeBeanList = gson.fromJson(responseData, type);        //gson»ñÈ¡µ½µÄÊı¾İ³ÉÎªÒ»¸ö¸öbannerbean¶ÔÏóÈ»ºóÌí¼Óµ½mbannerlistÁĞ±íÖĞ
+                System.out.println(responseData);
+                Gson gson = new Gson();     //ç”¨Gsonè§£æJsonæ•°æ®
+                Type type = new TypeToken<List<HomeBean>>(){}.getType();  //è¿™å¥ä¸çŸ¥é“æ˜¯å¹²å˜›ï¼Œè·å–ç±»å‹ï¼Ÿ!!!!è¿™é‡Œè¦æ”¹HomeBeanï¼Œè°ƒè¯•äº†å¥½ä¹…æ‰æŸ¥å‡ºé”™è¯¯äº§ç”Ÿçš„å¹¶ä¸æ˜¯HomeBeanå¯¹è±¡
 
+                //homeBeanList = gson.fromJson(responseData, type);å‘ç°è¿™å„¿çš„homeBeanListæœ‰æ•°æ®ï¼Œä½†å¤–éƒ¨æ²¡æœ‰ï¼Œæ‰€ä»¥ä¸èƒ½è¿™æ ·å†™
+                homeBeanList.clear();
+                List<HomeBean> list = gson.fromJson(responseData, type);
+                homeBeanList.addAll(list);
+                /*//debug
+                for (HomeBean homeBean:homeBeanList){
+                    Log.d(TAG,homeBean.toString());
+                }*/
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -169,15 +180,15 @@ public class Fragment1 extends Fragment{
         });
     }
 
-    //ÏÂÔØÍ¼Æ¬×ÊÔ´£¬Ê¹ÓÃokhttp·½Ê½¡£
+    //ä¸‹è½½å›¾ç‰‡èµ„æºï¼Œä½¿ç”¨okhttpæ–¹å¼ã€‚
     private void loadBannerData() {
-        OkHttpClient client = new OkHttpClient();       //´´½¨ÍøÂçÊµÀı
-        //´´½¨ÇëÇó
+        OkHttpClient client = new OkHttpClient();       //åˆ›å»ºç½‘ç»œå®ä¾‹
+        //åˆ›å»ºè¯·æ±‚
         Request request = new Request.Builder()
-                .url(Constant.HEAD_URL + "?type=1")         //½Ó¿ÚÎÄµµÖĞtypeÎª1µÄÊı¾İ£¨¹ã¸æÍ¼Æ¬£©
+                .url(Constant.HEAD_URL + "?type=1")         //æ¥å£æ–‡æ¡£ä¸­typeä¸º1çš„æ•°æ®ï¼ˆå¹¿å‘Šå›¾ç‰‡ï¼‰
                 .build();
-        //·µ»ØÊı¾İ
-        client.newCall(request).enqueue(new Callback() {     //ÊéÉÏÊ¹ÓÃµÄexecute()·½·¨£¬Í¬²½·½Ê½¡£ÀÏÊ¦µÄÊÇenqueue(new Callback())Õâ¸öÊÇÃ»ÓĞ·µ»ØÖµµÄ£¬Òì²½·½Ê½¡£
+        //è¿”å›æ•°æ®
+        client.newCall(request).enqueue(new Callback() {     //ä¹¦ä¸Šä½¿ç”¨çš„execute()æ–¹æ³•ï¼ŒåŒæ­¥æ–¹å¼ã€‚è€å¸ˆçš„æ˜¯enqueue(new Callback())è¿™ä¸ªæ˜¯æ²¡æœ‰è¿”å›å€¼çš„ï¼Œå¼‚æ­¥æ–¹å¼ã€‚
             @Override
             public void onFailure(Call call, IOException e) {
                 if(getActivity() == null) return;
@@ -193,33 +204,33 @@ public class Fragment1 extends Fragment{
             public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
 //                System.out.println(responseData);
-                Gson gson = new Gson();     //ÓÃGson½âÎöJsonÊı¾İ
-                Type type = new TypeToken<List<BannerBean>>(){}.getType();  //Õâ¾ä²»ÖªµÀÊÇ¸ÉÂï£¬»ñÈ¡ÀàĞÍ£¿
-                mBannerList = gson.fromJson(responseData, type);        //gson»ñÈ¡µ½µÄÊı¾İ³ÉÎªÒ»¸ö¸öbannerbean¶ÔÏóÈ»ºóÌí¼Óµ½mbannerlistÁĞ±íÖĞ
+                Gson gson = new Gson();     //ç”¨Gsonè§£æJsonæ•°æ®
+                Type type = new TypeToken<List<BannerBean>>(){}.getType();  //è¿™å¥ä¸çŸ¥é“æ˜¯å¹²å˜›ï¼Œè·å–ç±»å‹ï¼Ÿ
+                mBannerList = gson.fromJson(responseData, type);        //gsonè·å–åˆ°çš„æ•°æ®æˆä¸ºä¸€ä¸ªä¸ªbannerbeanå¯¹è±¡ç„¶åæ·»åŠ åˆ°mbannerliståˆ—è¡¨ä¸­
 
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if(mBannerList != null && mBannerList.size()>=0){
-                            mIndicateLinearLayout.removeAllViews(); //ÏÈÇå³ıÔÙÖØĞÂ¼ÓÔØ
+                            mIndicateLinearLayout.removeAllViews(); //å…ˆæ¸…é™¤å†é‡æ–°åŠ è½½
                             mBannerViewsList.clear();
                             mIndicateLinearLayout.removeAllViews();
 
                             for (int j=0; j<mBannerList.size(); j++){
-                                //Í¼Æ¬´¦Àí
+                                //å›¾ç‰‡å¤„ç†
                                 ImageView imageView = new ImageView(getActivity());
                                 imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                                        ViewGroup.LayoutParams.MATCH_PARENT));  //¿í¸ß
-                                imageView.setBackgroundResource(0);     //Õâ¾ä²»¶®£¿ ÊÇ³·µô±³¾°£¿£¿
+                                        ViewGroup.LayoutParams.MATCH_PARENT));  //å®½é«˜
+                                imageView.setBackgroundResource(0);     //è¿™å¥ä¸æ‡‚ï¼Ÿ æ˜¯æ’¤æ‰èƒŒæ™¯ï¼Ÿï¼Ÿ
                                 mBannerViewsList.add(imageView);
 
-                                //Ô²µãÖ¸Ê¾Æ÷´¦Àí
+                                //åœ†ç‚¹æŒ‡ç¤ºå™¨å¤„ç†
                                 ImageView indicateView = new ImageView(getActivity());
-                                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(18,18);   //20*20µÄÏñËØ´óĞ¡
+                                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(18,18);   //20*20çš„åƒç´ å¤§å°
                                 indicateView.setLayoutParams(lp);
                                 indicateView.setBackgroundResource(0);
-//                              indicateView.setImageResource(R.drawable.indicate_circle_gray);   //²»Í¨¹ıÕâÀïÕ¹Ê¾£¬·ñÔòÓëonPageSelected()·½·¨ÀïµÄÓĞÖØµş£¬Ğ§¹û²»ºÃ
-//                              indicateView.setPadding(4, 4, 4, 4);    //Ã¿¸öÔ²µãÍ¼Æ¬µÄÇ°ºó×óÓÒ¾àÀë
+//                              indicateView.setImageResource(R.drawable.indicate_circle_gray);   //ä¸é€šè¿‡è¿™é‡Œå±•ç¤ºï¼Œå¦åˆ™ä¸onPageSelected()æ–¹æ³•é‡Œçš„æœ‰é‡å ï¼Œæ•ˆæœä¸å¥½
+//                              indicateView.setPadding(4, 4, 4, 4);    //æ¯ä¸ªåœ†ç‚¹å›¾ç‰‡çš„å‰åå·¦å³è·ç¦»
                                 mIndicateLinearLayout.addView(indicateView);
                                 mIndicateList.add(indicateView);
 
@@ -236,24 +247,24 @@ public class Fragment1 extends Fragment{
 
     }
 
-    //Í¼Æ¬×Ô¶¯ÂÖ²¥¡£µ«Ô²µãÔõÃ´¸ü»»Í¼Æ¬ÄØ£¿²»ÔÚÕâ¶ù£¬ÔÚÄÇ¸öonchangelistener()¼àÌı·½·¨Àï
+    //å›¾ç‰‡è‡ªåŠ¨è½®æ’­ã€‚ä½†åœ†ç‚¹æ€ä¹ˆæ›´æ¢å›¾ç‰‡å‘¢ï¼Ÿä¸åœ¨è¿™å„¿ï¼Œåœ¨é‚£ä¸ªonchangelistener()ç›‘å¬æ–¹æ³•é‡Œ
     private Runnable bannerRunnable = new Runnable() {
         @Override
         public void run() {
-            //Ô²µãÖ¸Ê¾Æ÷Ëæ×ÅÍ¼Æ¬±ä»¯¶ø±ä»¯
+            //åœ†ç‚¹æŒ‡ç¤ºå™¨éšç€å›¾ç‰‡å˜åŒ–è€Œå˜åŒ–
             int index = mViewPager.getCurrentItem();
-            if(index == mBannerList.size()-1){  //Ñ­»·ÖØ¸´
+            if(index == mBannerList.size()-1){  //å¾ªç¯é‡å¤
                 index = -1;
             }else{
                 index = index+1;
             }
 
             mViewPager.setCurrentItem(index,true);
-            mIndicateLinearLayout.postDelayed(bannerRunnable,3000);     //Ã¿¹ı3Ãë½øĞĞÇĞ»»Í¼Æ¬
+            mIndicateLinearLayout.postDelayed(bannerRunnable,3000);     //æ¯è¿‡3ç§’è¿›è¡Œåˆ‡æ¢å›¾ç‰‡
         }
     };
 
-    //×Ô¶¨ÒåÒ»¸öBannerPagerAdapterµÄÊÊÅäÆ÷£¬¸øÍ·Í¼ÅäÖÃÓÃ
+    //è‡ªå®šä¹‰ä¸€ä¸ªBannerPagerAdapterçš„é€‚é…å™¨ï¼Œç»™å¤´å›¾é…ç½®ç”¨
     private class BannerPagerAdapter extends PagerAdapter{
 
         @Override
@@ -269,7 +280,7 @@ public class Fragment1 extends Fragment{
             return view == o;
         }
 
-        //ºóÃæÁ½¸ö·½·¨ÊÇ·Ç±ØĞëÖØĞ´µÄ£¬È»ºó½è¼øÀÏÊ¦µÄ¡£ĞèÒª£¡£¡ÕâÀï¶ÔÓ¦×ÅmBannerPagerAdapter.notifyDataSetChanged();
+        //åé¢ä¸¤ä¸ªæ–¹æ³•æ˜¯éå¿…é¡»é‡å†™çš„ï¼Œç„¶åå€Ÿé‰´è€å¸ˆçš„ã€‚éœ€è¦ï¼ï¼è¿™é‡Œå¯¹åº”ç€mBannerPagerAdapter.notifyDataSetChanged();
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView(mBannerViewsList.get(position));

@@ -1,14 +1,15 @@
 package com.idaniu.maga.shopping.bean;
 
 /**
- * frag1Ö÷Ò³µÄÆÙ²¼Á÷µÄÊı¾İ£¬Ã¿Ìõ¶ÔÓ¦Ò»¸öhomebean¶ÔÏó
+ * frag1ä¸»é¡µçš„ç€‘å¸ƒæµçš„æ•°æ®ï¼Œæ¯æ¡å¯¹åº”ä¸€ä¸ªhomebeanå¯¹è±¡
  * Created by yuanbao15 on 2017/10/10.
  */
 public class HomeBean {
 
     private long id;
+
     private String title;
-    private HomeItemBean cpOne;     //»î¶¯×Ó¶ÔÏóÊÇ¸ÉÂïµÄ£¿
+    private HomeItemBean cpOne;     //ä¸‰ä¸ªå¯¹è±¡ï¼Œæ¯ä¸ªå¯¹è±¡é‡Œéƒ½æœ‰ä¸€å¼ å›¾ç‰‡ã€idã€æ ‡é¢˜
     private HomeItemBean cpTwo;
     private HomeItemBean cpThree;
 
@@ -52,9 +53,7 @@ public class HomeBean {
         this.cpThree = cpThree;
     }
 
-
-
-    //HomeBeanÄÚ²¿Àà
+    //HomeBeanå†…éƒ¨ç±»
     public class HomeItemBean{
         private long id;
         private String title;
@@ -85,4 +84,40 @@ public class HomeBean {
         }
     }
 
+
+    /*
+    //testç”¨ æ²¡æœ‰ä¸‹ä¸€çº§å­å¯¹è±¡å›¾ç‰‡çš„ç®€å•æƒ…å†µ
+    private long id;
+    private String name;
+    private String imgUrl;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    @Override
+    public String toString() {
+        return id+","+name+","+imgUrl+"\n";
+    }*/
 }

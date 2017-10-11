@@ -1,18 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:padding="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/item_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
+    <!-- 区域标题-->
     <TextView
         android:id="@+id/item_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:layout_marginTop="10dp"/>
+    <!-- 标题下的虚线分割-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightgray"/>
+
+    <!--区域内的三个图-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="1dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/item_image2"
+                android:src="@drawable/icon_wechat_72"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/item_image3"
+                android:src="@drawable/icon_wechat_72"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/item_image1"
+            android:src="@drawable/icon_wechat_72"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="14"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

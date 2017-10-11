@@ -1,7 +1,7 @@
 package com.idaniu.maga.shopping.bean;
 
 /**
- * ÂÖ²¥Í¼Æ¬µÄjavabeanÀà
+ * è½®æ’­å›¾ç‰‡çš„javabeanç±»
  * Created by yuanbao15 on 2017/10/9.
  */
 public class BannerBean {
