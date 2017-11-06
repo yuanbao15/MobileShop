@@ -125,7 +125,14 @@ public class Fragment1 extends Fragment{
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);   //分成几列
         recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));      //普通线性展示
-        mHomeRecyclerAdapter = new HomeRecyclerAdapter(getActivity(),homeBeanList);
+//        mHomeRecyclerAdapter = new HomeRecyclerAdapter(getActivity(),homeBeanList);   //这是没有下拉刷新的，下面的有
+        mHomeRecyclerAdapter = new HomeRecyclerAdapter(getContext(),homeBeanList, new HomeRecyclerAdapter.OnMoreListener() {
+            @Override
+            public void onMore() {      //没实现
+                loadHomeData();
+                Toast.makeText(ShoppingApplication.getInstance(), "you refresh this page!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         recyclerView.setAdapter(mHomeRecyclerAdapter);
 //        Log.d(TAG, "frag1执行到这2");

@@ -9,6 +9,9 @@ import android.webkit.WebViewClient;
 
 import com.idaniu.maga.shopping.R;
 
+/**
+ * yb新建的用于点击头图后跳到的下一级页面，写了一个webview来展示自己的一个首页。
+ */
 public class BannerActivity extends ActionBarActivity {
 
     @Override

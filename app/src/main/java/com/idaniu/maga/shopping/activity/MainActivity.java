@@ -22,21 +22,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * description: Ö÷Ò³
+ * description: ä¸»é¡µ
  */
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
 
-    private ViewPager mViewPager;       //ÓÃÀ´Õ¹Ê¾Îå¸öfragmentµÄViewPager
-    private FragmentPagerAdapter mAdaper;   //FragmentPagerµÄÊÊÅäÆ÷
-    private List<Fragment> fragmentList;	//ÓÃÀ´´æ·Å¼¸¸öFragment
+    private ViewPager mViewPager;       //ç”¨æ¥å±•ç¤ºäº”ä¸ªfragmentçš„ViewPager
+    private FragmentPagerAdapter mAdaper;   //FragmentPagerçš„é€‚é…å™¨
+    private List<Fragment> fragmentList;	//ç”¨æ¥å­˜æ”¾å‡ ä¸ªFragment
 
-    private LinearLayout ll1;   //Îå¸ö±êÌâÀ¸
+    private LinearLayout ll1;   //äº”ä¸ªæ ‡é¢˜æ 
     private LinearLayout ll2;
     private LinearLayout ll3;
     private LinearLayout ll4;
     private LinearLayout ll5;
 
-    //±êÌâÀ¸ÖĞµÄÍ¼Æ¬ºÍÎÄ×Ö¿Ø¼ş
+    //æ ‡é¢˜æ ä¸­çš„å›¾ç‰‡å’Œæ–‡å­—æ§ä»¶
     private  ImageView iv1;
     private  ImageView iv2;
     private  ImageView iv3;
@@ -57,25 +57,25 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     }
 
-    //²¼¾Ö³õÊ¼»¯
+    //å¸ƒå±€åˆå§‹åŒ–
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentList = new ArrayList<Fragment>();
 
-        //5¸ö±êÌâ£¬²¢ÉèÖÃ¼àÌı
-        ll1 =(LinearLayout)findViewById(R.id.ll_1); //ÏÂÃæ±êÌâÀ¸µÄ²¼¾Ö£¬ÕÒµ½Õâ¸öÈİÆ÷ÓÃÓÚÌí¼ÓÊı×Ö
+        //5ä¸ªæ ‡é¢˜ï¼Œå¹¶è®¾ç½®ç›‘å¬
+        ll1 =(LinearLayout)findViewById(R.id.ll_1); //ä¸‹é¢æ ‡é¢˜æ çš„å¸ƒå±€ï¼Œæ‰¾åˆ°è¿™ä¸ªå®¹å™¨ç”¨äºæ·»åŠ æ•°å­—
         ll2 = (LinearLayout) findViewById(R.id.ll_2);
         ll3 = (LinearLayout) findViewById(R.id.ll_3);
         ll4= (LinearLayout) findViewById(R.id.ll_4);
         ll5= (LinearLayout) findViewById(R.id.ll_5);
-        //Îªµã»÷Õâ¼¸¸ö±êÌâÉèÖÃ¼àÌı
+        //ä¸ºç‚¹å‡»è¿™å‡ ä¸ªæ ‡é¢˜è®¾ç½®ç›‘å¬
         ll1.setOnClickListener(this);
         ll2.setOnClickListener(this);
         ll3.setOnClickListener(this);
         ll4.setOnClickListener(this);
         ll5.setOnClickListener(this);
 
-        //´´½¨¼¸¸öFragmentµÄÊµÀı Ìí¼Óµ½fragmentListÖĞ
+        //åˆ›å»ºå‡ ä¸ªFragmentçš„å®ä¾‹ æ·»åŠ åˆ°fragmentListä¸­
         Fragment1 fragment1 = new Fragment1();
         Fragment2 fragment2 = new Fragment2();
         Fragment3 fragment3 = new Fragment3();
@@ -87,9 +87,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         fragmentList.add(fragment4);
         fragmentList.add(fragment5);
 
-        initTab();  //±êÌâÀïµÄ¿Ø¼ş³õÊ¼»¯
+        initTab();  //æ ‡é¢˜é‡Œçš„æ§ä»¶åˆå§‹åŒ–
 
-        //¶ÔAdapter½øĞĞÉèÖÃ
+        //å¯¹Adapterè¿›è¡Œè®¾ç½®
         mAdaper = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
@@ -102,10 +102,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }
         };
 
-        //Îªviewpager¿Ø¼şÌí¼ÓÊÊÅäÆ÷
+        //ä¸ºviewpageræ§ä»¶æ·»åŠ é€‚é…å™¨
         mViewPager.setAdapter(mAdaper);
 
-        //Ò³Ãæ¸Ä±ä¼àÌıÊÂ¼ş£¬±êÌâ×ÖÌåµÄÑÕÉ«¶ÔÓ¦×Å·¢Éú±ä»¯
+        //é¡µé¢æ”¹å˜ç›‘å¬äº‹ä»¶ï¼Œæ ‡é¢˜å­—ä½“çš„é¢œè‰²å¯¹åº”ç€å‘ç”Ÿå˜åŒ–
         /*mViewPager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +116,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
             @Override
             public void onPageSelected(int position) {
-                resetTabView();	//ÏÈ³õÊ¼»¯
+                resetTabView();	//å…ˆåˆå§‹åŒ–
 
                 switch (position) {
                     case 0:
@@ -146,12 +146,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
-                //arg0 ÎªpositionÒ³ÃæÂë, float arg1ÎªoffsetÒ³Ãæ·­×ªÍê³É°Ù·Ö±È, int arg2ÎªoffsetPxÒ³Ãæ·­×ªÍê³ÉµÄÏñËØÖµ
+                //arg0 ä¸ºpositioné¡µé¢ç , float arg1ä¸ºoffseté¡µé¢ç¿»è½¬å®Œæˆç™¾åˆ†æ¯”, int arg2ä¸ºoffsetPxé¡µé¢ç¿»è½¬å®Œæˆçš„åƒç´ å€¼
 
 
              /*
                 Log.d("tabline", arg0 + "," + arg1 + "," + arg2);
-                //ÉèÖÃtablineµÄ×ó±ß¾àÀë
+                //è®¾ç½®tablineçš„å·¦è¾¹è·ç¦»
                 LinearLayout.LayoutParams lllp = (android.widget.LinearLayout.LayoutParams) tabLine.getLayoutParams();
                 lllp.leftMargin = (int) (arg0*screen1_3 + arg1*screen1_3);
                 tabLine.setLayoutParams(lllp);
@@ -165,7 +165,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         });
     }
 
-    //±êÌâÀ¸ÀïµÄ¿Ø¼şÒıÓÃ³õÊ¼»¯
+    //æ ‡é¢˜æ é‡Œçš„æ§ä»¶å¼•ç”¨åˆå§‹åŒ–
     private void initTab() {
         iv1 = (ImageView)findViewById(R.id.iv_1);
         iv2 = (ImageView)findViewById(R.id.iv_2);
@@ -179,13 +179,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         tv4 = (TextView)findViewById(R.id.tv_4);
         tv5 = (TextView)findViewById(R.id.tv_5);
 
-        //Ä¬ÈÏ×´Ì¬¡£µÚÒ»¸öÒ³Ãæ
+        //é»˜è®¤çŠ¶æ€ã€‚ç¬¬ä¸€ä¸ªé¡µé¢
         resetTabView();
         iv1.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_1_red));
         tv1.setTextColor(Color.RED);
     }
 
-    //±êÌâÀ¸ÏÔÊ¾³õÊ¼×´Ì¬£ºÍ¼Æ¬¡¢ÎÄ×Ö¡£Ã¿´ÎÇĞ»»Ê±Ê×ÏÈ»Ö¸´³õÊ¼×´Ì¬
+    //æ ‡é¢˜æ æ˜¾ç¤ºåˆå§‹çŠ¶æ€ï¼šå›¾ç‰‡ã€æ–‡å­—ã€‚æ¯æ¬¡åˆ‡æ¢æ—¶é¦–å…ˆæ¢å¤åˆå§‹çŠ¶æ€
     private void resetTabView() {
         iv1.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_1_gray));
         iv2.setImageDrawable(getResources().getDrawable(R.drawable.tab_iv_2_gray));
@@ -201,10 +201,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     }
 
-    //µã»÷ÏÂÃæ±êÌâÀ¸ÏÔÊ¾²»Í¬Ò³Ãæ
+    //ç‚¹å‡»ä¸‹é¢æ ‡é¢˜æ æ˜¾ç¤ºä¸åŒé¡µé¢
     @Override
     public void onClick(View v) {
-        int index = 0;	//ËùÔÚÒ³ÃæË÷ÒıÖµ
+        int index = 0;	//æ‰€åœ¨é¡µé¢ç´¢å¼•å€¼
 
         switch (v.getId()) {
             case R.id.ll_1:
