@@ -43,27 +43,29 @@ public class LoginActivity extends BaseActivity {
         mFogetButton = (TextView) findViewById(R.id.forgetButton);
         mLoginButton = (TextView) findViewById(R.id.loginButton);
 
+        //注册按钮
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivityForResult(intent, 10002);  //??这个是干嘛
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
             }
         });
 
+        //登录按钮
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //phone、password都不能为空
-                String phone = mPhoneEdit.getText().toString();
-                String password = mPasswordEdit.getText().toString();
-                if (TextUtils.isEmpty(phone) || TextUtils.isEmpty(phone.trim()) || TextUtils.isEmpty(password) || TextUtils.isEmpty(password.trim())) {
-                    Toast.makeText(LoginActivity.this, "请输入手机号与密码", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            //phone、password都不能为空
+            String phone = mPhoneEdit.getText().toString();
+            String password = mPasswordEdit.getText().toString();
+            if (TextUtils.isEmpty(phone) || TextUtils.isEmpty(phone.trim()) || TextUtils.isEmpty(password) || TextUtils.isEmpty(password.trim())) {
+                Toast.makeText(LoginActivity.this, "请输入手机号与密码", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-                //开始登录
-                login(phone, password);
+            //开始登录
+            login(phone, password);
             }
         });
 
@@ -81,16 +83,16 @@ public class LoginActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        hideDialog();//不管成功还是失败，第一件事就是取消掉进度框
+                    hideDialog();//不管成功还是失败，第一件事就是取消掉进度框
 
-                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        setResult(RESULT_OK);//设置登录成功标志，前一个Activity根据这个标志进行下一步操作
+                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK);//设置登录成功标志，前一个Activity根据这个标志进行下一步操作
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivityForResult(intent, 10001);  //
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivityForResult(intent, 10001);  //
 
-                        //登录成功后，这个页面不再有用，直接杀掉
-                        finish();
+                    //登录成功后，这个页面不再有用，直接杀掉
+                    finish();
                     }
                 });
             }
@@ -100,9 +102,9 @@ public class LoginActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        hideDialog();
+                    hideDialog();
 
-                        Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "登录失败，请检查用户名或密码是否准确", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -112,7 +114,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 10002){//表示注册成功
+        if(requestCode == 10002){   //表示注册成功，销毁掉上一个activity
             if(resultCode == RESULT_OK){
                 finish();
             }

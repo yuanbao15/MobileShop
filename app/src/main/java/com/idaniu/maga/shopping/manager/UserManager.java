@@ -79,7 +79,7 @@ public class UserManager {
     }
 
     /**
-     * 登录
+     * 登录方法模块
      *
      * @param phone 电话号码
      * @param password 密码
@@ -132,8 +132,9 @@ public class UserManager {
             }
         });
     }
+
     /**
-     * 注册
+     * 注册方法模块
      *
      * @param phone 电话号码
      * @param password 密码

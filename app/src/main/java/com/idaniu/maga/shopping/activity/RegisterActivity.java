@@ -36,41 +36,41 @@ public class RegisterActivity extends BaseActivity{
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phone = mPhoneEditText.getText().toString();
-                String password = mPasswordEditText.getText().toString();
+            String phone = mPhoneEditText.getText().toString();
+            String password = mPasswordEditText.getText().toString();
 
-                if(TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)){
-                    Toast.makeText(RegisterActivity.this, "请完整输入手机号码和密码", Toast.LENGTH_SHORT).show();
-                    return;
+            if(TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)){
+                Toast.makeText(RegisterActivity.this, "请完整输入手机号码和密码", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            showDialog();
+
+            UserManager.getInstance().register(phone, password, new UserManager.OnRegisterListener() {
+                @Override
+                public void onRegister() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                        hideDialog();
+                        Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
+                        finish();
+                        }
+                    });
                 }
 
-                showDialog();
-
-                UserManager.getInstance().register(phone, password, new UserManager.OnRegisterListener() {
-                    @Override
-                    public void onRegister() {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                hideDialog();
-                                Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                                setResult(RESULT_OK);
-                                finish();
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onError(String msg) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                hideDialog();
-                                Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
+                @Override
+                public void onError(String msg) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                        hideDialog();
+                        Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
             }
         });
 

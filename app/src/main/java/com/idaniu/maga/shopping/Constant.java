@@ -17,9 +17,9 @@ public class Constant {
 
     public static final String HOST = "http://train.dolphin.com";
 
-    public static final String LOGIN_URL = HOST + "/course_api/auth/login";
-    public static final String REGISTER_URL = HOST + "/course_api/auth/reg";
-    public  static final String DES_KEY="12345670";
+    public static final String LOGIN_URL = HOST + "/course_api/auth/login";     //登录url；
+    public static final String REGISTER_URL = HOST + "/course_api/auth/reg";    //注册url；
+    public  static final String DES_KEY="12345670";     //加密算法的密钥。
 
     public static final MediaType CONTENT_TYPE = MediaType.parse("application/x-www-form-urlencoded");
 

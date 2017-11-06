@@ -22,9 +22,8 @@ public class DESUtil {
      * @param data
      *         待加密字符串
      * @param key
-     *            加密私钥，长度不能够小于8位
+     *         加密私钥，长度不能够小于8位
      * @return 加密后的字节数组，一般结合Base64编码使用
-
      * @throws Exception
      */
     public static String encode(String key, String data) {
