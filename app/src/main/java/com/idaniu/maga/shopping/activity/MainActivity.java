@@ -37,11 +37,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private LinearLayout ll5;
 
     //标题栏中的图片和文字控件
-    private  ImageView iv1;
-    private  ImageView iv2;
-    private  ImageView iv3;
-    private  ImageView iv4;
-    private  ImageView iv5;
+    private ImageView iv1;
+    private ImageView iv2;
+    private ImageView iv3;
+    private ImageView iv4;
+    private ImageView iv5;
     private TextView tv1;
     private TextView tv2;
     private TextView tv3;
@@ -63,11 +63,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         fragmentList = new ArrayList<Fragment>();
 
         //5个标题，并设置监听
-        ll1 =(LinearLayout)findViewById(R.id.ll_1); //下面标题栏的布局，找到这个容器用于添加数字
+        ll1 = (LinearLayout) findViewById(R.id.ll_1); //下面标题栏的布局，找到这个容器用于添加数字
         ll2 = (LinearLayout) findViewById(R.id.ll_2);
         ll3 = (LinearLayout) findViewById(R.id.ll_3);
-        ll4= (LinearLayout) findViewById(R.id.ll_4);
-        ll5= (LinearLayout) findViewById(R.id.ll_5);
+        ll4 = (LinearLayout) findViewById(R.id.ll_4);
+        ll5 = (LinearLayout) findViewById(R.id.ll_5);
         //为点击这几个标题设置监听
         ll1.setOnClickListener(this);
         ll2.setOnClickListener(this);

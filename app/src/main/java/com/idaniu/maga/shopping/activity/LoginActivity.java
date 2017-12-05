@@ -21,7 +21,7 @@ import com.idaniu.maga.shopping.manager.UserManager;
 public class LoginActivity extends BaseActivity {
 
     private static final String TAG = "LoginActivity";
-    public static final int LOGIN_CODE = 10001;//登录成功标识
+    public static final int LOGIN_CODE = 10001;     //登录成功标识
 
     private TextView mRegisterButton, mFogetButton, mLoginButton;
     private EditText mPhoneEdit, mPasswordEdit;

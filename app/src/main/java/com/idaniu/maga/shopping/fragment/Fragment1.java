@@ -39,7 +39,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 第一个fragment，展示主页
+ * 第一个fragment，展示主页，包含一个图片轮播banner和一个瀑布流视图
  * Created by yuanbao15 on 2017/10/8.
  */
 public class Fragment1 extends Fragment{
@@ -55,12 +55,13 @@ public class Fragment1 extends Fragment{
     private List<ImageView> mBannerViewsList = new ArrayList<>();   //图片展示的集合
 
     private List<HomeBean> homeBeanList = new ArrayList<>();    //主页瀑布流的部分
-    private HomeRecyclerAdapter mHomeRecyclerAdapter;
+    private HomeRecyclerAdapter homeRecyclerAdapter;
     private RecyclerView recyclerView;
 
-/*    public static Fragment1 newInstance(String tabName){
+    /*
+    public static Fragment1 newInstance(String tabName){
         Fragment1 fragment = new Fragment1();
-//        fragment.mTabName = tabName;
+//      fragment.mTabName = tabName;
         return fragment;
     }*/
 
@@ -71,7 +72,7 @@ public class Fragment1 extends Fragment{
 
         View v = inflater.inflate(R.layout.frag1, container, false);
         initView(v);
-//        getLayoutInflater(savedInstanceState).inflate(R.layout.home_item,container);
+//      getLayoutInflater(savedInstanceState).inflate(R.layout.home_item,container);
 // 没有这句报错，因为否则就不知道把哪一个布局放到瀑布流中。也不对，viewHolder里有对R.layout.home_item的引用
         return v;
     }
@@ -98,7 +99,7 @@ public class Fragment1 extends Fragment{
                     View view = mIndicateLinearLayout.getChildAt(j);
                     if (j == i) {
                         view.setSelected(true);
-                        mIndicateList.get(j).setBackgroundResource(R.drawable.indicate_circle_red); //实现圆点的状态变化
+                        mIndicateList.get(j).setBackgroundResource(R.drawable.indicate_circle_red); //实现指示圆点的状态变化
                     } else {
                         view.setSelected(false);
                         mIndicateList.get(j).setBackgroundResource(R.drawable.indicate_circle_gray);
@@ -116,8 +117,7 @@ public class Fragment1 extends Fragment{
 
         loadBannerData();       //下载 图片轮播的图片资源
 
-
-        loadHomeData();     //下载 主页瀑布流的数据
+        loadHomeData();         //下载 主页瀑布流的数据
 
         //主页瀑布流部分初始化
         recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_home);
@@ -126,7 +126,7 @@ public class Fragment1 extends Fragment{
         recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));      //普通线性展示
 //        mHomeRecyclerAdapter = new HomeRecyclerAdapter(getActivity(),homeBeanList);   //这是没有下拉刷新的，下面的有
-        mHomeRecyclerAdapter = new HomeRecyclerAdapter(getContext(),homeBeanList, new HomeRecyclerAdapter.OnMoreListener() {
+        homeRecyclerAdapter = new HomeRecyclerAdapter(getContext(),homeBeanList, new HomeRecyclerAdapter.OnMoreListener() {
             @Override
             public void onMore() {      //没实现
                 loadHomeData();
@@ -134,12 +134,12 @@ public class Fragment1 extends Fragment{
             }
         });
 
-        recyclerView.setAdapter(mHomeRecyclerAdapter);
+        recyclerView.setAdapter(homeRecyclerAdapter);
 //        Log.d(TAG, "frag1执行到这2");
 
     }
 
-    //下载主页homebean数据，使用okhttp方式。
+    //下载主页Fragment1的homebean数据，使用okhttp方式。
     private void loadHomeData() {
         OkHttpClient client = new OkHttpClient();       //创建网络实例
         //创建请求
@@ -177,14 +177,14 @@ public class Fragment1 extends Fragment{
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mHomeRecyclerAdapter.notifyDataSetChanged();
+                        homeRecyclerAdapter.notifyDataSetChanged();
                     }
                 });
             }
         });
     }
 
-    //下载图片资源，使用okhttp方式。
+    //下载头图轮播的图片资源，使用okhttp方式。
     private void loadBannerData() {
         OkHttpClient client = new OkHttpClient();       //创建网络实例
         //创建请求
@@ -192,7 +192,7 @@ public class Fragment1 extends Fragment{
                 .url(Constant.HEAD_URL + "?type=1")         //接口文档中type为1的数据（广告图片）
                 .build();
         //返回数据
-        client.newCall(request).enqueue(new Callback() {     //书上使用的execute()方法，同步方式。老师的是enqueue(new Callback())这个是没有返回值的，异步方式。
+        client.newCall(request).enqueue(new Callback() {    //书上使用的execute()方法，同步方式。老师的是enqueue(new Callback())这个是没有返回值的，异步方式。
             @Override
             public void onFailure(Call call, IOException e) {
                 if(getActivity() == null) return;
@@ -247,7 +247,6 @@ public class Fragment1 extends Fragment{
                 });
             }
         });
-
 
     }
 

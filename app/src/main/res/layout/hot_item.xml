@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="115dp">
+
+        <ImageView
+            android:id="@+id/iv_product"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_wechat_72"/>
+
+        <LinearLayout
+            android:layout_weight="2.5"
+            android:orientation="vertical"
+            android:padding="2dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="这里是标题：发放假啊两斤肥肉是管理机构及胺类逛街啊连接符及违规或加了个叫我屁股"
+                android:lines="3"
+                android:textColor="#696969"
+                android:textSize="20sp"/>
+            <!--分割线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"/>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp">
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:padding="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="20sp"
+                    android:textColor="@color/red"
+                    android:text="￥1000.0"
+                    android:textStyle="bold"/>
+                <Button
+                    android:id="@+id/bt_buy"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:padding="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/red"
+                    android:text="点击购买"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#999"/>
+
+</LinearLayout>

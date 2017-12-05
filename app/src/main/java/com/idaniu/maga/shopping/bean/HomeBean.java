@@ -7,9 +7,7 @@ package com.idaniu.maga.shopping.bean;
 public class HomeBean {
 
     private long id;
-
     private String title;
-
     private HomeItemBean cpOne;     //三个对象，每个对象里都有一张图片、id、标题
     private HomeItemBean cpTwo;
     private HomeItemBean cpThree;

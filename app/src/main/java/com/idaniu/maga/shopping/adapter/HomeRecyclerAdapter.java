@@ -1,7 +1,6 @@
 package com.idaniu.maga.shopping.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,7 +25,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
 
     private Context context;
     private List<HomeBean> homeBeanList;
-    private OnMoreListener mOnMoreListener; //下拉刷新的接口
+    private OnMoreListener onMoreListener; //下拉刷新的接口
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView1;
@@ -56,7 +55,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     public HomeRecyclerAdapter(Context context, List<HomeBean> homeBeanList, OnMoreListener mOnMoreListener) {
         this.context = context;
         this.homeBeanList = homeBeanList;
-        this.mOnMoreListener = mOnMoreListener;
+        this.onMoreListener = mOnMoreListener;
     }
 
     @Override
