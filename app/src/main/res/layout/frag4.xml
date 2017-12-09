@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,5 +11,83 @@
         android:background="#555"
         android:gravity="center"/>
 
+    <!--标题抬头 购物车、编辑-->
+    <RelativeLayout
+        android:id="@+id/cart_head"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="购物车"
+            android:textColor="@color/white"
+            android:textSize="25sp"/>
+        <Button
+            android:id="@+id/btn_cart_edit"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编辑"
+            android:textColor="@color/whitesmoke"
+            android:textSize="20sp"/>
+    </RelativeLayout>
 
-</LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_cart"
+        android:layout_below="@+id/cart_head"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--购物车的底部 是否权限、总价、结算-->
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:background="@color/wheat"
+        android:alpha="0.7"
+        android:layout_height="50dp">
+        <CheckBox
+            android:id="@+id/checkbox_cart_all"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_toRightOf="@id/checkbox_cart_all"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全选"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv_cart_totalprice"
+            android:layout_toRightOf="@+id/checkbox_cart_all"
+            android:paddingLeft="70dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="合计：111110元"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/btn_cart_account"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/lightgray"
+            android:text="去结算"
+            android:textSize="22sp"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

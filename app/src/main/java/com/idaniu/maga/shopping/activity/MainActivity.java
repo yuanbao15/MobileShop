@@ -69,18 +69,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         ll4 = (LinearLayout) findViewById(R.id.ll_4);
         ll5 = (LinearLayout) findViewById(R.id.ll_5);
         //为点击这几个标题设置监听
-        ll1.setOnClickListener(this);
-        ll2.setOnClickListener(this);
-        ll3.setOnClickListener(this);
-        ll4.setOnClickListener(this);
-        ll5.setOnClickListener(this);
-
         //创建几个Fragment的实例 添加到fragmentList中
         Fragment1 fragment1 = new Fragment1();
         Fragment2 fragment2 = new Fragment2();
         Fragment3 fragment3 = new Fragment3();
         Fragment4 fragment4 = new Fragment4();
         Fragment5 fragment5 = new Fragment5();
+        ll1.setOnClickListener(this);
+        ll2.setOnClickListener(this);
+        ll3.setOnClickListener(this);
+        ll4.setOnClickListener(this);
+        ll5.setOnClickListener(this);
+
         fragmentList.add(fragment1);
         fragmentList.add(fragment2);
         fragmentList.add(fragment3);

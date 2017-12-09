@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="100dp" >
+
+    <CheckBox
+        android:id="@+id/cart_single_checkbox"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+    <ImageView
+        android:id="@+id/iv_cart_single"
+        android:layout_toRightOf="@id/cart_single_checkbox"
+        android:layout_centerVertical="true"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/icon_alipay_72"/>
+
+    <TextView
+        android:id="@+id/tv_cart_single_title"
+        android:layout_toRightOf="@+id/iv_cart_single"
+        android:layout_width="match_parent"
+        android:lines="2"
+        android:layout_height="50dp"
+        android:text="商品名称阿飞就上了个就问问就给我就是垃圾国外国内那个字嗯干活了"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tv_cart_single_price"
+        android:layout_below="@id/tv_cart_single_title"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="价格"
+        android:textSize="18sp"
+        android:textColor="@color/red"/>
+
+    <LinearLayout
+        android:id="@+id/ll_cart_addorreduce"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_cart_reduce"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/shape_button"
+            android:text="-"
+            android:textSize="20sp"/>
+        <EditText
+            android:id="@+id/et_cart_num"
+            android:layout_marginLeft="5dp"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_button"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="1"
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/btn_cart_add"
+            android:layout_marginLeft="5dp"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_button"
+            android:gravity="center"
+            android:text="+"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <!--分隔线-->
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/gray"/>
+
+</RelativeLayout>

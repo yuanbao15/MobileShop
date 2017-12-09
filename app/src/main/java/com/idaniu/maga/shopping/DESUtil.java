@@ -19,10 +19,8 @@ public class DESUtil {
     /**
      * DES算法，加密
      *
-     * @param data
-     *         待加密字符串
-     * @param key
-     *         加密私钥，长度不能够小于8位
+     * @param key   加密私钥，长度不能够小于8位
+     * @param data  待加密字符串
      * @return 加密后的字节数组，一般结合Base64编码使用
      * @throws Exception
      */
