@@ -3,11 +3,11 @@
 
 ### app界面截图
 1.主页  
-<img src="https://note.youdao.com/yws/api/personal/file/73DDF1E0EDFB4618937F6CBC7941EBA7?method=download&shareKey=7c7680d70d17c3b99a194b6c04456555" width="400px" />  
+<img src="https://note.youdao.com/yws/public/resource/c5af0cf2f1688709e0b40a5948910c55/xmlnote/E20A7529911340E39C4C3F09754444C5/10211" width="400px" />  
 2.热卖页  
-<img src="yb_images/Screenshot_2.png" width="400px" />  
+<img src="https://note.youdao.com/yws/public/resource/c5af0cf2f1688709e0b40a5948910c55/xmlnote/C12B1504C48F4666BDEA6813AC254E96/10213" width="400px" />  
 3.购物车页  
-<img src="yb_images/Screenshot_3.png" width="400px" />  
+<img src="https://note.youdao.com/yws/public/resource/c5af0cf2f1688709e0b40a5948910c55/xmlnote/BD085F59768246C9BFE280105C208983/10209" width="400px" />  
 
   <!-- 
   ![Screenshot1](yb_images/Screenshot_1.png)
