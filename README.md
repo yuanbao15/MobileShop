@@ -12,9 +12,8 @@ android手机商城实战项目  --yuanbao
 <img src="https://note.youdao.com/yws/public/resource/788e5edd6beecc09ba36ae0fc7c33223/xmlnote/BD085F59768246C9BFE280105C208983/1800" width="400px" />  
 
 
-  <!-- 
-  ![Screenshot1](yb_images/Screenshot_1.png)
-  ![Screenshot2](yb_images/Screenshot_2.png)
-  ![Screenshot3](yb_images/Screenshot_3.png)
-  
-  -->
+ 
+  ![Screenshot1](./yb_images/Screenshot_1.png)
+  ![Screenshot2](./yb_images/Screenshot_2.png)
+  ![Screenshot3](./yb_images/Screenshot_3.png)
+
